@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  tasks:
+  - name: Create host "testhost"
+    local_action:
+      module: zabbix_host
+      server_url: http://localhost:8083
+      login_user: Admin
+      login_password: zabbix
+      host_name: testhost.nsw.education
+      description: Test Host
+      status: enabled
+      state: present
