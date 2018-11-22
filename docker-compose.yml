@@ -3,6 +3,9 @@ services:
   zabbix:
     build:
       context: .
+      args:
+        postgres_version: 9.2.24
+        zabbix_version: 4.0.1
       dockerfile: Dockerfile
     volumes:
       - db-data:/var/lib/postgresql/data
@@ -10,7 +13,7 @@ services:
       - "8080:80"
       - "10051"
     environment:
-      -
+      - "TZ=Australia/Sydney"
 
 volumes:
   db-data:
