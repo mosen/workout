@@ -1,0 +1,3 @@
+Ansible was used to download the "Template App Zabbix Agent" because ansible also ships with the ability to import a modified template.
+In an "infrastructure as code" context, the workflow of modify/commit/deploy would have been easier with Ansible rather than developing a
+python script to handle the dump and import steps.
