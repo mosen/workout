@@ -1,7 +1,9 @@
 FROM centos:7.5.1804
 LABEL org.label-schema.name = "Zabbix Omnibus Workout of the Day"
-ARG postgres_version
-ARG zabbix_version
+ARG POSTGRES_VERSION
+ARG ZABBIX_VERSION
+
+RUN echo "Building with PostgreSQL Version: ${POSTGRES_VERSION}"
 
 ENV PGDATA /var/lib/postgresql/data
 
