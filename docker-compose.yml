@@ -4,16 +4,18 @@ services:
     build:
       context: .
       args:
-        postgres_version: 9.2.24
-        zabbix_version: 4.0.1
+        POSTGRES_VERSION: 9.2.24
+        ZABBIX_VERSION: 4.0.1
+        CONFD_VERSION: 0.16.0
       dockerfile: Dockerfile
     volumes:
       - db-data:/var/lib/postgresql/data
     ports:
       - "8080:80"
-      - "10051"
+      - "10051:10051"
     environment:
       - "TZ=Australia/Sydney"
+
 
 volumes:
   db-data:

@@ -1,0 +1,36 @@
+[template]
+src = "zabbix_server.conf.tmpl"
+dest = "/etc/zabbix/zabbix_server.conf"
+keys = [
+    "/debuglevel",
+
+    "/db/host",
+    "/db/name",
+    "/db/schema",
+    "/db/user",
+    "/db/password",
+    "/db/socket",
+    "/db/port",
+
+    "/start/pollers",
+    "/start/ipmipollers",
+    "/start/preprocessors",
+    "/start/pollersunreachable",
+    "/start/trappers",
+    "/start/pingers",
+    "/start/discoverers",
+    "/start/httppollers",
+    "/start/timers",
+    "/start/escalators",
+    "/start/alerters",
+    "/start/javapollers",
+    "/start/vmwarecollectors",
+
+    "/java/gateway",
+    "/java/gatewayport",
+
+    "/vmware/frequency",
+    "/vmware/perffrequency",
+    "/vmware/cachesize",
+    "/vmware/timeout",
+]
