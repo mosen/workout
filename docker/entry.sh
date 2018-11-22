@@ -1,8 +1,8 @@
 #!/bin/bash
 
-PGSQL_DATABASE=${PGSQL_DATABASE:-"zabbix"}
-PGSQL_USER=${PGSQL_USER:-"zabbix"}
-PGSQL_PASSWORD=${PGSQL_PASSWORD:-"zabbix"}
+POSTGRES_DATABASE=${POSTGRES_DATABASE:-"zabbix"}
+POSTGRES_USER=${POSTGRES_USER:-"zabbix"}
+POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-"zabbix"}
 
 # DO NOT RELEASE WITH THIS
 echo "php_value date.timezone Australia/Sydney" >> /etc/httpd/conf.d/zabbix.conf

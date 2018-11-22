@@ -4,10 +4,17 @@
   - name: Create host "testhost"
     local_action:
       module: zabbix_host
-      server_url: http://localhost:8083
+      server_url: http://localhost:8080/zabbix
       login_user: Admin
       login_password: zabbix
       host_name: testhost.nsw.education
+      host_groups:
+        - Linux servers
+      interfaces:
+        - type: 1
+          main: 1
+          useip: 1
+          ip: 10.0.0.1
       description: Test Host
       status: enabled
       state: present

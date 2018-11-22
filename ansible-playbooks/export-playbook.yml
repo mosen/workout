@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+  tasks:
+  - name: Export template "Template App Zabbix Agent"
+    local_action:
+      module: zabbix_template
+      server_url: http://localhost:8080/zabbix
+      login_user: Admin
+      login_password: zabbix
+      template_name: Template App Zabbix Agent
+      state: dump
+    register: template_dump
+  - name: Export to JSON file
+    local_action:
+      module: copy
+      content: "{{ template_dump }}"
+      dest: ./export_zabbix_agent.template

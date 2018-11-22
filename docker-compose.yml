@@ -1,0 +1,16 @@
+version: '3'
+services:
+  zabbix:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "8080:80"
+      - "10051"
+    environment:
+      -
+
+volumes:
+  db-data:
