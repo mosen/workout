@@ -10,6 +10,7 @@
       template_name: Template App Zabbix Agent
       state: dump
     register: template_dump
+
   - name: Export to JSON file
     local_action:
       module: copy

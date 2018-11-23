@@ -7,7 +7,7 @@ This repository contains the contents for "Monitoring DevOps WOD".
 This container is based on a CentOS 7 image and contains a complete
 Zabbix stack (server, web, agent) and Postgres instance.
 
-
+Configuration is exposed via environmental variables using [confd](https://github.com/kelseyhightower/confd)
 
 ### Building
 
@@ -140,9 +140,16 @@ These modules require **zabbix-api >= 0.5.3**.
 ### testhost-playbook.yml
 
 This playbook contains a single task, which is to create a test host on a Zabbix instance.
+You can run the playbook by changing into the `ansible-playbooks` directory and executing:
+
+    $ ansible-playbook ./testhost-playbook.yml
 
 ### export-playbook.yml
 
-This playbook contains task(s) to export a single template from a Zabbix host into the same directory.
+This playbook contains task(s) to export a single template from a Zabbix host into the same directory
+as `export_zabbix_agent.template`.
 
+You can run the playbook by changing into the `ansible-playbooks` directory and executing:
+
+    $ ansible-playbook ./export-playbook.yml
 
