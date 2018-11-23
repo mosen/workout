@@ -34,6 +34,8 @@ If you used the default database configuration, you can run through the setup wi
 If you changed the `DB_USER`, `DB_PASSWORD` or `DB_NAME` variables, you will need to enter those connection
 details at the relevant step(s).
 
+The default admin credentials are `Admin` / `zabbix`.
+
 #### With Docker Compose
 
 For ease of testing, a `docker-compose.yml` file has also been supplied in the root of this
@@ -71,9 +73,9 @@ Most zabbix_server.conf variables are also exposed via **confd** and can be supp
 - `DB_PORT`: Database port number if different to default.
 - `DB_SCHEMA`: Schema (if using Postgres)
 - `DB_SOCKET`: Local socket path (if using MySQL/MariaDB)
-- `HISTORYSTORAGEURL`: 
-- `HISTORYSTORAGETYPES`:
-- `HISTORYSTORAGEDATEINDEX`:
+- `HISTORY_STORAGEURL`: 
+- `HISTORY_STORAGETYPES`:
+- `HISTORY_STORAGEDATEINDEX`:
 - `EXPORT_DIR`: Events export directory
 - `EXPORT_FILESIZE`: (Default **1G**)
 
@@ -91,6 +93,9 @@ Worker Processes
 - `START_ALTERTERS`: (Default 3) Number of pre-forked instances of alerters. 
 - `START_JAVAPOLLERS`: (Default 0) Number of pre-forked instances of Java pollers.
 - `START_VMWARECOLLECTORS`: (Default 0) Number of pre-forked vmware collector instances.
+- `START_SNMPTRAPPER`: (Default 0) If 1, SNMP trapper process is started.
+- `START_DBSYNCERS`: (Default 4) Number of pre-forked instances of DB Syncers.
+
 
 Java Gateway
 
@@ -104,6 +109,27 @@ VMware
 - `VMWARE_CACHESIZE`: (Default **8M**) Size of VMware cache, in bytes.
 - `VMWARE_TIMEOUT`: (Default 10) Specifies how many seconds vmware collector waits for response from VMware service.
 
+Cache
+
+- `CACHE_SIZE`: (Default **8M**) Size of configuration cache, in bytes.
+- `CACHE_UPDATEFREQUENCY`: (Default 60) How often Zabbix will perform update of configuration cache, in seconds.
+
+History
+
+- `HISTORY_CACHESIZE`: (Default **16M**) Size of history cache, in bytes.
+- `HISTORY_INDEXCACHESIZE`: (Default **4M**) Size of history index cache, in bytes.
+
+- `HOUSEKEEPINGFREQUENCY`: (Default 1) How often Zabbix will perform housekeeping procedure (in hours).
+- `MAXHOUSEKEEPERDELETE`: (Default 5000) No more than 'MaxHousekeeperDelete' rows will be deleted per one task in one housekeeping cycle.
+- `TRENDCACHESIZE`: (Default **4M**) Size of trend cache, in bytes.
+- `VALUECACHESIZE`: (Default **8M**) Size of history value cache, in bytes.
+- `TIMEOUT`: (Default 4) Specifies how long we wait for agent, SNMP device or external check (in seconds).
+- `TRAPPERTIMEOUT`: (Default 300) Specifies how many seconds trapper may spend processing new data.
+
+- `UNREACHABLEPERIOD`: (Default 45) After how many seconds of unreachability treat a host as unavailable.
+- `UNAVAILABLEDELAY`: (Default 60) How often host is checked for availability during the unavailability period, in seconds.
+- `UNREACHABLEDELAY`: (Default 15) How often host is checked for availability during the unreachability period, in seconds.
+- `LOGSLOWQUERIES`: (Default 3000) How long a database query may take before being logged (in milliseconds).
 
 ## Ansible Playbooks
 

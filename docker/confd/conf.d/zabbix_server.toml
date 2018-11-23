@@ -12,6 +12,10 @@ keys = [
     "/db/socket",
     "/db/port",
 
+    "/history/storageurl",
+    "/history/storagetypes",
+    "/history/storagedateindex",
+
     "/start/pollers",
     "/start/ipmipollers",
     "/start/preprocessors",
@@ -25,6 +29,8 @@ keys = [
     "/start/alerters",
     "/start/javapollers",
     "/start/vmwarecollectors",
+    "/start/snmptrapper",
+    "/start/dbsyncers",
 
     "/java/gateway",
     "/java/gatewayport",
@@ -33,4 +39,24 @@ keys = [
     "/vmware/perffrequency",
     "/vmware/cachesize",
     "/vmware/timeout",
+
+    "/cache/size",
+    "/cache/updatefrequency",
+
+    "/history/cachesize",
+    "/history/indexcachesize",
+
+    "/housekeepingfrequency",
+    "/maxhousekeeperdelete",
+    "/trendcachesize",
+    "/valuecachesize",
+    "/timeout",
+    "/trappertimeout",
+
+    "/unreachableperiod",
+    "/unavailabledelay",
+    "/unreachabledelay",
+    "/logslowqueries",
+
+
 ]

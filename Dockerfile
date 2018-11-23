@@ -56,7 +56,7 @@ RUN chmod 755 /entry.sh
 
 # Zabbix-Web
 EXPOSE 80
-EXPOSE 443
+# EXPOSE 443
 
 # If external pgsql access required
 # EXPOSE 5432

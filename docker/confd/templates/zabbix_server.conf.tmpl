@@ -14,9 +14,9 @@ DBPassword={{getv "/db/password" "zabbix"}}
 DBSocket={{getv "/db/socket" ""}}
 # DBPort={{getv "/db/port" ""}}
 
-HistoryStorageURL={{getv "/historystorageurl" ""}}
-HistoryStorageTypes={{getv "/historystoragetypes" "uint,dbl,str,log,text"}}
-HistoryStorageDateIndex={{getv "/historystoragedateindex" "0"}}
+# HistoryStorageURL={{getv "/history/storageurl" ""}}
+HistoryStorageTypes={{getv "/history/storagetypes" "uint,dbl,str,log,text"}}
+HistoryStorageDateIndex={{getv "/history/storagedateindex" "0"}}
 
 # ExportDir={{getv "/export/dir" ""}}
 ExportFileSize={{getv "/export/filesize" "1G"}}
@@ -36,6 +36,8 @@ StartEscalators={{getv "/start/escalators" "1"}}
 StartAlerters={{getv "/start/alerters" "3"}}
 StartJavaPollers={{getv "/start/javapollers" "0"}}
 StartVMwareCollectors={{getv "/start/vmwarecollectors" "0"}}
+StartSNMPTrapper={{getv "/start/snmptrapper" "0"}}
+StartDBSyncers={{getv "/start/dbsyncers" "4"}}
 
 # Java
 JavaGateway={{getv "/java/gateway" ""}}
@@ -47,14 +49,12 @@ VMwarePerfFrequency={{getv "/vmware/perffrequency" "60"}}
 VMwareCacheSize={{getv "/vmware/cachesize" "8M"}}
 VMwareTimeout={{getv "/vmware/timeout" "10"}}
 
+# Cache
+CacheSize={{getv "/cache/size" "8M"}}
+CacheUpdateFrequency={{getv "/cache/updatefrequency" "60"}}
 
-### Option: VMwareTimeout
-#	Specifies how many seconds vmware collector waits for response from VMware service.
-#
-# Mandatory: no
-# Range: 1-300
-# Default:
-# VMwareTimeout=10
+HistoryCacheSize={{getv "/history/cachesize" "16M"}}
+HistoryIndexCacheSize={{getv "/history/indexcachesize" "4M"}}
 
 ### Option: SNMPTrapperFile
 #	Temporary file used for passing data from SNMP trap daemon to the server.
@@ -66,194 +66,21 @@ VMwareTimeout={{getv "/vmware/timeout" "10"}}
 
 SNMPTrapperFile=/var/log/snmptrap/snmptrap.log
 
-### Option: StartSNMPTrapper
-#	If 1, SNMP trapper process is started.
-#
-# Mandatory: no
-# Range: 0-1
-# Default:
-# StartSNMPTrapper=0
-
-### Option: ListenIP
-#	List of comma delimited IP addresses that the trapper should listen on.
-#	Trapper will listen on all network interfaces if this parameter is missing.
-#
-# Mandatory: no
-# Default:
-# ListenIP=0.0.0.0
-
-# ListenIP=127.0.0.1
-
-### Option: HousekeepingFrequency
-#	How often Zabbix will perform housekeeping procedure (in hours).
-#	Housekeeping is removing outdated information from the database.
-#	To prevent Housekeeper from being overloaded, no more than 4 times HousekeepingFrequency
-#	hours of outdated information are deleted in one housekeeping cycle, for each item.
-#	To lower load on server startup housekeeping is postponed for 30 minutes after server start.
-#	With HousekeepingFrequency=0 the housekeeper can be only executed using the runtime control option.
-#	In this case the period of outdated information deleted in one housekeeping cycle is 4 times the
-#	period since the last housekeeping cycle, but not less than 4 hours and not greater than 4 days.
-#
-# Mandatory: no
-# Range: 0-24
-# Default:
-# HousekeepingFrequency=1
-
-### Option: MaxHousekeeperDelete
-#	The table "housekeeper" contains "tasks" for housekeeping procedure in the format:
-#	[housekeeperid], [tablename], [field], [value].
-#	No more than 'MaxHousekeeperDelete' rows (corresponding to [tablename], [field], [value])
-#	will be deleted per one task in one housekeeping cycle.
-#	SQLite3 does not use this parameter, deletes all corresponding rows without a limit.
-#	If set to 0 then no limit is used at all. In this case you must know what you are doing!
-#
-# Mandatory: no
-# Range: 0-1000000
-# Default:
-# MaxHousekeeperDelete=5000
-
-### Option: CacheSize
-#	Size of configuration cache, in bytes.
-#	Shared memory size for storing host, item and trigger data.
-#
-# Mandatory: no
-# Range: 128K-8G
-# Default:
-# CacheSize=8M
-
-### Option: CacheUpdateFrequency
-#	How often Zabbix will perform update of configuration cache, in seconds.
-#
-# Mandatory: no
-# Range: 1-3600
-# Default:
-# CacheUpdateFrequency=60
-
-### Option: StartDBSyncers
-#	Number of pre-forked instances of DB Syncers.
-#
-# Mandatory: no
-# Range: 1-100
-# Default:
-# StartDBSyncers=4
-
-### Option: HistoryCacheSize
-#	Size of history cache, in bytes.
-#	Shared memory size for storing history data.
-#
-# Mandatory: no
-# Range: 128K-2G
-# Default:
-# HistoryCacheSize=16M
-
-### Option: HistoryIndexCacheSize
-#	Size of history index cache, in bytes.
-#	Shared memory size for indexing history cache.
-#
-# Mandatory: no
-# Range: 128K-2G
-# Default:
-# HistoryIndexCacheSize=4M
-
-### Option: TrendCacheSize
-#	Size of trend cache, in bytes.
-#	Shared memory size for storing trends data.
-#
-# Mandatory: no
-# Range: 128K-2G
-# Default:
-# TrendCacheSize=4M
-
-### Option: ValueCacheSize
-#	Size of history value cache, in bytes.
-#	Shared memory size for caching item history data requests.
-#	Setting to 0 disables value cache.
-#
-# Mandatory: no
-# Range: 0,128K-64G
-# Default:
-# ValueCacheSize=8M
-
-### Option: Timeout
-#	Specifies how long we wait for agent, SNMP device or external check (in seconds).
-#
-# Mandatory: no
-# Range: 1-30
-# Default:
-# Timeout=3
-
-Timeout=4
-
-### Option: TrapperTimeout
-#	Specifies how many seconds trapper may spend processing new data.
-#
-# Mandatory: no
-# Range: 1-300
-# Default:
-# TrapperTimeout=300
-
-### Option: UnreachablePeriod
-#	After how many seconds of unreachability treat a host as unavailable.
-#
-# Mandatory: no
-# Range: 1-3600
-# Default:
-# UnreachablePeriod=45
-
-### Option: UnavailableDelay
-#	How often host is checked for availability during the unavailability period, in seconds.
-#
-# Mandatory: no
-# Range: 1-3600
-# Default:
-# UnavailableDelay=60
-
-### Option: UnreachableDelay
-#	How often host is checked for availability during the unreachability period, in seconds.
-#
-# Mandatory: no
-# Range: 1-3600
-# Default:
-# UnreachableDelay=15
-
-### Option: AlertScriptsPath
-#	Full path to location of custom alert scripts.
-#	Default depends on compilation options.
-#	To see the default path run command "zabbix_server --help".
-#
-# Mandatory: no
-# Default:
-# AlertScriptsPath=${datadir}/zabbix/alertscripts
-
 AlertScriptsPath=/usr/lib/zabbix/alertscripts
-
-### Option: ExternalScripts
-#	Full path to location of external scripts.
-#	Default depends on compilation options.
-#	To see the default path run command "zabbix_server --help".
-#
-# Mandatory: no
-# Default:
-# ExternalScripts=${datadir}/zabbix/externalscripts
-
 ExternalScripts=/usr/lib/zabbix/externalscripts
 
-### Option: FpingLocation
-#	Location of fping.
-#	Make sure that fping binary has root ownership and SUID flag set.
-#
-# Mandatory: no
-# Default:
-# FpingLocation=/usr/sbin/fping
+HousekeepingFrequency={{getv "/housekeepingfrequency" "1"}}
+MaxHousekeeperDelete={{getv "/maxhousekeeperdelete" "5000"}}
 
-### Option: Fping6Location
-#	Location of fping6.
-#	Make sure that fping6 binary has root ownership and SUID flag set.
-#	Make empty if your fping utility is capable to process IPv6 addresses.
-#
-# Mandatory: no
-# Default:
-# Fping6Location=/usr/sbin/fping6
+TrendCacheSize={{getv "/trendcachesize" "4M"}}
+ValueCacheSize={{getv "/valuecachesize" "8M"}}
+Timeout={{getv "/timeout" "4"}}
+TrapperTimeout={{getv "/trappertimeout" "300"}}
+UnreachablePeriod={{getv "/unreachableperiod" "45"}}
+UnavailableDelay={{getv "/unavailabledelay" "60"}}
+UnreachableDelay={{getv "/unreachabledelay" "15"}}
+
+LogSlowQueries={{getv "/logslowqueries" "3000"}}
 
 ### Option: SSHKeyLocation
 #	Location of public and private keys for SSH checks and actions.
@@ -262,24 +89,6 @@ ExternalScripts=/usr/lib/zabbix/externalscripts
 # Default:
 # SSHKeyLocation=
 
-### Option: LogSlowQueries
-#	How long a database query may take before being logged (in milliseconds).
-#	Only works if DebugLevel set to 3, 4 or 5.
-#	0 - don't log slow queries.
-#
-# Mandatory: no
-# Range: 1-3600000
-# Default:
-# LogSlowQueries=0
-
-LogSlowQueries=3000
-
-### Option: TmpDir
-#	Temporary directory.
-#
-# Mandatory: no
-# Default:
-# TmpDir=/tmp
 
 ### Option: StartProxyPollers
 #	Number of pre-forked instances of pollers for passive proxies.
