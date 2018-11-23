@@ -73,9 +73,9 @@ Most zabbix_server.conf variables are also exposed via **confd** and can be supp
 - `DB_PORT`: Database port number if different to default.
 - `DB_SCHEMA`: Schema (if using Postgres)
 - `DB_SOCKET`: Local socket path (if using MySQL/MariaDB)
-- `HISTORY_STORAGEURL`: 
-- `HISTORY_STORAGETYPES`:
-- `HISTORY_STORAGEDATEINDEX`:
+- `HISTORY_STORAGEURL`: History storage HTTP[S] URL. 
+- `HISTORY_STORAGETYPES`: Comma separated list of value types to be sent to the history storage.
+- `HISTORY_STORAGEDATEINDEX`: Enable preprocessing of history values in history storage to store values in different indices based on date.
 - `EXPORT_DIR`: Events export directory
 - `EXPORT_FILESIZE`: (Default **1G**)
 
